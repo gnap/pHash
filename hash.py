@@ -1,15 +1,14 @@
 import Image
 import os, sys
-import binhex, binascii
 
 im = Image.open("portal2.jpg")
-print im.format, im.size, im.mode
 imlarger = im.copy();
 im = im.resize((8, 8))
 imlarger = imlarger.resize((32,32))
 im = im.convert("L")
 imlarger = imlarger.convert("L")
-print im.format, im.size, im.mode
+print "\nResolution:\t%s" % (im.size,)
+print "Mode:\t\t" + im.mode
 im.save("foo.jpg")
 imlarger.save("foo2.jpg")
 
@@ -20,8 +19,10 @@ def average(image):
 	for i in range(0,8):
 		for j in range(0,8):
 			count += pix[i, j]
-	count /= 64
-	print count
+	after = count / 64
+	print "Total:\t\t%d" % count
+	print "Average:\t%d" % after
+	return after
 
 # computes the hamming distance
 def hamming_distance(s1, s2):
@@ -34,17 +35,20 @@ def compute(image, av):
 	for i in range(0,8):
 		for j in range(0,8):
 			pix = image.load()
+			#print "--------------"
+			#print "(%d,%d): %d" % (i,j, pix[i,j])
 			if(pix[i, j] >= av):
 				pix[i, j] = 1
 			else:
 				pix[i, j] = 0
 			testString += `pix[i, j]`
-	print "This is the test string: " + testString
+	print "testString:\t" + testString
+	encoded = "%x" % int(testString,2)
+	print "Hash:\t\t" + encoded + "\n"
+	
 #	print binascii.b2a_hex(testString)
 
 
 # printing things out
-print compute(im, average(im))
-print hamming_distance("toned", "roses")
-print hamming_distance("1011101", "1001001")
-print hamming_distance("2173896", "2233796")
+avVal = average(im)
+compute(im, avVal)
