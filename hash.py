@@ -40,7 +40,7 @@ def compute(image, av):
 				pix[i, j] = 0
 			testString += `pix[i, j]`
 	print "This is the test string: " + testString
-	print binascii.b2a_hex(testString)
+#	print binascii.b2a_hex(testString)
 
 
 # printing things out
