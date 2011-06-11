@@ -29,7 +29,7 @@ def hamming_distance(s1, s2):
 	assert len(s1) == len(s2)
 	return sum(ch1 != ch2 for ch1, ch2 in zip(s1, s2))
 
-# compute the bits from the average
+# compute the hash
 def compute(image, av):
 	testString = ""
 	for i in range(0,8):
@@ -46,9 +46,6 @@ def compute(image, av):
 	encoded = "%x" % int(testString,2)
 	print "Hash:\t\t" + encoded + "\n"
 	
-#	print binascii.b2a_hex(testString)
-
-
 # printing things out
 avVal = average(im)
 compute(im, avVal)
