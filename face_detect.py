@@ -16,6 +16,8 @@
 import sys, os
 from opencv.cv import *
 from opencv.highgui import *
+import Image
+import re
 
 def detectObjects(image):
   """Converts an image to grayscale and prints the locations of any 
@@ -35,12 +37,20 @@ def detectObjects(image):
 
   if faces.total > 0:
     for f in faces:
-      print("[(%d,%d) -> (%d,%d)]" % (f.x, f.y, f.x+f.width, f.y+f.height))
+      return ("[(%d,%d) -> (%d,%d)]" % (f.x, f.y, f.x+f.width, f.y+f.height))
+      #print("[(%d,%d) -> (%d,%d)]" % (f.x, f.y, f.x+f.width, f.y+f.height))
 
 def main():
-  image = cvLoadImage(sys.argv[1]);
-  detectObjects(image)
+  im = cvLoadImage(sys.argv[1]);
+  coords = detectObjects(im)
+  co = re.split('\D+', coords)
+  #image.crop(tuple(co))
+  toCrop = Image.open(sys.argv[1])
+  im2 = toCrop.crop((int(co[1]),int(co[2]),int(co[3]),int(co[4])))
+  im2.save(sys.argv[2])
+  #for i in range(1,5):
+#	print co[i]
+
 
 if __name__ == "__main__":
   main()
-

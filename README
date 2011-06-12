@@ -1,2 +1,8 @@
 Requirements:
 - Python Imaging Library (http://www.pythonware.com/products/pil/)
+
+Ubuntu Modules:
+python-opencv
+opencv-docs
+imagemagick
+libc-dev
