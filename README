@@ -1,5 +1,6 @@
 Requirements:
 - Python Imaging Library (http://www.pythonware.com/products/pil/)
+- OpenCV (http://opencv.willowgarage.com/wiki/)
 
 Ubuntu Modules:
 python-opencv
