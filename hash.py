@@ -8,6 +8,8 @@
 
 import Image
 import os, sys
+from opencv.cv import *
+import cv
 
 # find the average value
 def average(image):
@@ -22,10 +24,13 @@ def average(image):
 	return val
 
 # find the DCT value
-def dct(image):
+def hashDct(image):
+	dest = []
 	mean = average(image)	
-	compute(image, mean, 32)
-	print "Average:\t%d" % mean
+	src = compute(image, mean, 32)
+	cv.DCT(src, dest, CV_DXT_FORWARD)
+	dest.save("dctsave.jpg")
+	#print "Average:\t%d" % mean
 
 # compute the hash
 def compute(image, av, size):
@@ -54,11 +59,19 @@ def hamming_distance(s1, s2):
 
 # printing things out
 def main():
+	if len(sys.argv) <= 1 or len(sys.argv) > 3:
+		print "Usage %s: <image1> <image2>" % sys.argv[0]
 	im = Image.open(sys.argv[1])
 	im = im.resize((8, 8))
 	im = im.convert("L")
 	avVal = average(im)
 	hash1 = compute(im, avVal, 8)
+# -------- DCT ----------
+	imDct = Image.open(sys.argv[1])
+	imDct = imDct.resize((32, 32))
+	imDct = imDct.convert("L")
+	hashDct(imDct)
+# -------- DCT ----------
 #	print "\nResolution:\t%s" % (im.size,)
 #	print "Mode:\t\t" + im.mode
 #	im.save("output.jpg")
@@ -74,7 +87,6 @@ def main():
 	  print "Hamming distance = %d. Images are similar." % result
 	else:
 	  print "Hamming distance = %d. Images are not similar" % result
-	#dct(im)
 
 if __name__ == "__main__":
 	main()
