@@ -28,8 +28,11 @@ def detectObjects(image):
   storage = cvCreateMemStorage(0)
   cvClearMemStorage(storage)
   cvEqualizeHist(grayscale, grayscale)
+  path = '/usr/share/opencv/haarcascades/haarcascade_frontalface_default.xml'
+  if not os.path.exists(path):
+    path = 'haarcascade_frontalface_default.xml'
   cascade = cvLoadHaarClassifierCascade(
-    'haarcascade_frontalface_default.xml',
+    path,
     #'/usr/share/opencv/haarcascades/haarcascade_frontalface_default.xml',
     cvSize(1,1))
   faces = cvHaarDetectObjects(grayscale, cascade, storage, 1.2, 2,
