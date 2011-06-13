@@ -25,10 +25,12 @@ def average(image):
 
 # find the DCT value
 def hashDct(image):
-	dest = []
 	mean = average(image)	
 	src = compute(image, mean, 32)
-	cv.DCT(src, dest, CV_DXT_FORWARD)
+        ci = cvCreateImage(src, IPL_DEPTH_8U, 1)
+        data = src.tostring()
+        cvSetData(ci, data, len(data))
+	cv.DCT(ci, dest, CV_DXT_FORWARD)
 	dest.save("dctsave.jpg")
 	#print "Average:\t%d" % mean
 
