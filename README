@@ -7,3 +7,7 @@ Ubuntu Modules:
 - opencv-docs
 - imagemagick
 - libc-dev
+
+Usage:
+python face_detect.py  <image1>
+python hash.py <image1> <image2>
