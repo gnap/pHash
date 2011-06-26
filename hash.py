@@ -27,11 +27,11 @@ def average(image):
 def hashDct(image):
 	mean = average(image)	
 	src = compute(image, mean, 32)
-        ci = cvCreateImage(src, IPL_DEPTH_8U, 1)
-        data = src.tostring()
-        cvSetData(ci, data, len(data))
-	cv.DCT(ci, dest, CV_DXT_FORWARD)
-	dest.save("dctsave.jpg")
+	ci = cvCreateImage((32,32), IPL_DEPTH_8U, 1)
+	#data = src#.tostring()
+	#cvSetData(ci, data, len(data))
+	#cv.DCT(ci, dest, CV_DXT_FORWARD)
+	#dest.save("dctsave.jpg")
 	#print "Average:\t%d" % mean
 
 # compute the hash
@@ -69,14 +69,14 @@ def main():
 	avVal = average(im)
 	hash1 = compute(im, avVal, 8)
 # -------- DCT ----------
-	imDct = Image.open(sys.argv[1])
-	imDct = imDct.resize((32, 32))
-	imDct = imDct.convert("L")
-	hashDct(imDct)
+	#imDct = Image.open(sys.argv[1])
+	#imDct = imDct.resize((32, 32))
+	#imDct = imDct.convert("L")
+	#hashDct(imDct)
 # -------- DCT ----------
-#	print "\nResolution:\t%s" % (im.size,)
-#	print "Mode:\t\t" + im.mode
-#	im.save("output.jpg")
+	print "\nResolution:\t%s" % (im.size,)
+	print "Mode:\t\t" + im.mode
+	im.save("output.jpg")
 	im2 = Image.open(sys.argv[2])
 	im2 = im2.resize((8, 8))
 	im2 = im2.convert("L")
