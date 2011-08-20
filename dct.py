@@ -21,11 +21,15 @@ def main():
 	img = img.resize((32,32))
 	img = img.convert("L")
 	arr = PIL2array(img)
+	#print arr
 	src = cv.CreateMat(32, 32, CV_32FC1)
 	dst = cv.CreateMat(32, 32, CV_32FC1)
 	cv.DCT(src, dst, CV_DXT_FORWARD)
-	img2 = array2PIL(dst.tostring(), img.size)
+	imgarray = numpy.asarray(dst)
+	#img2 = array2PIL(imgarray, img.size)
 	#img2 = array2PIL(arr, img.size)
+	img2 = Image.fromarray(numpy.uint8(imgarray))
+	print imgarray
 	img2.save('out.jpg')
 
 if __name__ == '__main__':
