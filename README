@@ -1,3 +1,6 @@
+***Note:
+- I probably broke this when I started breaking up the algorithm into one that computes uses an Averaging Hash and a hash relying on the DCT.
+
 Requirements:
 - Python Imaging Library (http://www.pythonware.com/products/pil/)
 - OpenCV (http://opencv.willowgarage.com/wiki/)
